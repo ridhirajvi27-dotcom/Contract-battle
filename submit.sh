@@ -1,43 +1,37 @@
 #!/bin/bash
-
-# -------------------------
-# THE HACKER CLI 🚀
-# -------------------------
-# Organizer Note: Update JUDGE_URL once you deploy the docker container!
 JUDGE_URL="https://contract-battle-judge.onrender.com/submit"
 REPO_OWNER="Rohan-droid7341"
 REPO_NAME="Contract-battle"
 
-# Ensure curl is installed
 if ! command -v curl &> /dev/null; then
     echo "⚠️ Error: curl is required to transmit the payload."
     exit 1
 fi
 
-echo -n "Enter your Pilot Name (no spaces): "
-read USERNAME
+USERNAME=$(git config --get remote.origin.url | sed -E 's/.*github\.com[:\/]([^\/]+).*/\1/')
+if [ -z "$USERNAME" ] || [[ "$USERNAME" == *"git@"* ]]; then
+    USERNAME=$(git config user.name)
+fi
 
-if [[ "$USERNAME" == *" "* ]] || [[ -z "$USERNAME" ]]; then
-    echo "🛑 Aborting: Pilot Name is required and cannot contain spaces."
+if [[ -z "$USERNAME" ]]; then
+    echo "🛑 Aborting: Could not detect GitHub Username from git config."
     exit 1
 fi
 
 if [ ! -f "src/Level1.sol" ]; then
-    echo "🛑 Aborting: src/Level1.sol not found. Are you currently in the root directory?"
+    echo "🛑 Aborting: src/Level1.sol not found."
     exit 1
 fi
 
-echo "🚀 Bundling your Level 1 module..."
-
+echo "🚀 Bundling Level 1 module for Pilot: $USERNAME..."
 echo "📡 Transmitting module to Central Judge..."
+
 RESPONSE=$(curl -s -X POST "$JUDGE_URL" \
     --data-urlencode "username=$USERNAME" \
     --data-urlencode "repoOwner=$REPO_OWNER" \
     --data-urlencode "repoName=$REPO_NAME" \
     --data-urlencode "code@src/Level1.sol")
 
-# Verify transmission and evaluation
-# The server will return lines like STATUS=SUCCESS, MESSAGE=..., LEVEL2=...
 STATUS=$(echo "$RESPONSE" | grep "^STATUS=" | cut -d'=' -f2)
 
 if [ "$STATUS" == "SUCCESS" ]; then
@@ -46,7 +40,6 @@ if [ "$STATUS" == "SUCCESS" ]; then
     
     BODY_B64=$(echo "$RESPONSE" | grep "^LEVEL2=" | cut -d'=' -f2)
     
-    # Decode base64 depending on OS
     if [[ "$OSTYPE" == "darwin"* ]]; then
         echo "$BODY_B64" | base64 --decode > src/Level2.sol
     else

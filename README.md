@@ -1,9 +1,9 @@
-# 🏆 Galactic Leaderboard
+# 🏆 Contract Battle Leaderboard
 
-*The bravest pilots in the galaxy are recorded here.*
+*The top developers are recorded here.*
 
 <!-- LEADERBOARD_START -->
-| Rank | Pilot | Highest Level | Timestamp (UTC) |
+| Rank | Player | Highest Level | Timestamp (UTC) |
 |------|-------|---------------|-----------------|
 | 1 | Rohan-droid7341 | 4 | 2026-04-08 11:21:19 |
 | 2 | chiragshirsath | 1 | 2026-04-08 11:31:44 |
@@ -11,16 +11,16 @@
 
 ---
 
-# Interstellar Vault 🚀
+# Contract Battle ⚔️
 
-Welcome, spacefarer, to the Interstellar Vault! This is a competitive, level-based smart contract challenge designed to test your raw Solidity hacking and development skills across progressively devastating security flaws.
+Welcome to Contract Battle! This is a competitive, level-based smart contract challenge designed to test your raw Solidity hacking and development skills across progressively devastating security flaws.
 
 ## How to Play
 
 ### 1. Setup the Template
-To begin your journey, you must clone the mission repository:
+To begin your journey, you **MUST** fork the repository:
 
-1. **Fork this repository** to your own GitHub account.
+1. **Fork this repository** to your own GitHub account using the "Fork" button at the top right of the page.
 2. **Clone your fork locally**:
    ```bash
    git clone https://github.com/YOUR_USERNAME/Contract-battle.git
@@ -28,11 +28,11 @@ To begin your journey, you must clone the mission repository:
    ```
 
 ### 2. Understand the File Structure
-Your galactic workspace contains the following critical directories:
+Your workspace contains the following critical directories:
 - `instructions/` — Contains your current mission briefing (e.g., `Level1.md`). Read this first to understand the vulnerabilities.
 - `src/` — Contains the buggy smart contract template. **This is where you will write your code!**
 - `test/` — Contains a lightweight local test file.
-- `submit.sh` — The secure transmission script to submit your code to the Central Judge.
+- `submit.sh` — The secure transmission script to submit your code.
 
 ### 3. Install Foundry (The Environment)
 This project uses pure native Solidity. You will need **Foundry** to run and compile your code.
@@ -62,11 +62,11 @@ When you are ready to face the Judge, do not commit. Instead, simply run:
 ```bash
 ./submit.sh
 ```
-*(Your Pilot Name will be automatically detected safely via your GitHub identity).*
+*(Your GitHub Username will be automatically detected safely via your git identity).*
 
-**The Galactic Judge:** Your terminal will securely transmit your code to the Central Judge. 
-- A radar ping will appear in your terminal. The Judge is currently compiling and running **secret edge-case evaluator tests** against your smart contract.
+**The Central Judge:** Your terminal will securely transmit your code to the remote evaluator. 
+- The Judge will compile and run **secret edge-case evaluator tests** against your smart contract.
 - If you pass, your terminal will announce `ACCESS GRANTED` and the Judge will autonomously drop the next level's files straight onto your hard drive! 
-- Your name will also be permanently etched into the Galactic Leaderboard above.
-- There are **4 Levels** in total. If you conquer them all, you will receive the final broadcast!
+- Your name will also be permanently etched into the Leaderboard above.
+- There are **4 Levels** in total. If you conquer them all, you will receive the final confirmation!
 - If you fail, access is denied. Examine your code locally and try again!

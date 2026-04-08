@@ -34,8 +34,8 @@ if [ ! -f "$TARGET_FILE" ]; then
     exit 1
 fi
 
-echo "🚀 Bundling Level $LEVEL module for Pilot: $USERNAME..."
-echo "📡 Transmitting module to Central Judge..."
+echo "🚀 Bundling Level $LEVEL module for User: $USERNAME..."
+echo "📡 Transmitting module to remote server..."
 
 RESPONSE=$(curl -s -X POST "$JUDGE_URL" \
     --data-urlencode "username=$USERNAME" \
@@ -47,7 +47,7 @@ RESPONSE=$(curl -s -X POST "$JUDGE_URL" \
 STATUS=$(echo "$RESPONSE" | grep "^STATUS=" | cut -d'=' -f2)
 
 if [ "$STATUS" == "SUCCESS" ]; then
-    echo "🟢 ACCESS GRANTED! You have passed the hidden evaluation."
+    echo "🟢 SUCCESS! You have passed the evaluation."
     echo "📦 Extracting Level $((LEVEL+1)) payload..."
     
     echo "$RESPONSE" | grep "^FILE_" | while IFS='=' read -r key val; do
@@ -62,7 +62,7 @@ if [ "$STATUS" == "SUCCESS" ]; then
         echo "   ✅ $filename installed."
     done
     
-    echo "🏆 Check the official repository to see your name on the Galactic Leaderboard!"
+    echo "🏆 Check the official repository to see your name on the Leaderboard!"
     exit 0
 else
     echo "🔴 ACCESS DENIED."
